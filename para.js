@@ -1,34 +1,37 @@
-function addNumbers() {
-    const newNumbers = [];
-    for (let i = 0; i < 30; i++) { 
-        newNumbers.push(Math.floor(Math.random() * 100));
-    }
+  function generateRandomNumbers() {
+            const numbers = [];
+            for (let i = 0; i < 30; i++) {
+                numbers.push(Math.floor(Math.random() * 100));
+            }
+            return numbers;
+        }
 
-    let table = document.querySelector('table');
-    let cellIndex = 0;
+        function fillTable() {
+            const numbers = generateRandomNumbers();
+            let table = document.querySelector('table');
+            let cellIndex = 0;
 
-    for (let i = 0; i < 5; i++) {
-        let row = table.rows[i + 1];
-        for (let j = 0; j < 6; j++) {
-            let cell = row.cells[j];
-
-            if (cell.textContent === "") {
-                cell.textContent = newNumbers[cellIndex];
-                if (newNumbers[cellIndex] >= 50) {
-                    cell.classList.add('orange');
+            for (let i = 0; i < 5; i++) {
+                let row = table.rows[i + 1];
+                for (let j = 0; j < 6; j++) {
+                    let cell = row.cells[j];
+                    cell.textContent = numbers[cellIndex];
+                    if (numbers[cellIndex] >= 50) {
+                        cell.classList.add('orange');
+                    } else {
+                        cell.classList.remove('orange');
+                    }
+                    cellIndex++;
                 }
-                cellIndex++;
-                return; 
             }
         }
-    }
-    alert("Таблица заполнена!"); 
-}
 
+        function updateNumbers() {
+            fillTable();
+        }
 
-
-
-
-// console.log("Hello world")
+        // Заполняем таблицу при загрузке страницы
+        window.onload = fillTable;
+    </script>
 
 
